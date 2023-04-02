@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Editor from './components/Editor.js';
+import Previewer from './components/Previewer.js';
+import './scss/App.scss';
+import starter from './starterText.js';
+
+
+
+
+
 
 function App() {
+  const [input, setInput] = React.useState(starter);
+
+  const handleChange = (e) => {
+    setInput(e.target.value)
+  }
+
+  const handleClear = () => {
+    setInput('')
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <div className='container-fluid'>
+        <div className='row text-center bg-success text-white py-3 header align-items-center'>
+          <h1>Markdown Previewer</h1>
+        </div>
+        <div className='row'>
+            <Editor text={input} handleChange={handleChange} handleClear={handleClear} />
+            <Previewer text={input}/>
+        </div>
+      </div>
+    </main>
   );
 }
 
